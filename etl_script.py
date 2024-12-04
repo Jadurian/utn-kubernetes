@@ -2,23 +2,31 @@
 
 import psycopg2  # Cliente PostgreSQL
 import requests  # Para solicitar la API
+import datetime
 
 # Configuración de la base de datos
-conn = psycopg2.connect(
-    host="postgres-service",
-    database="mydatabase",
-    user="myuser",
-    password="mypassword",
-    port= "5432",
-    client_encoding="UTF8"
-)
+try:
+    conn = psycopg2.connect(
+        host="localhost",
+        database="mydatabase",
+        user="postgres",
+        password="mypassword",
+        port= "5432",
+        #options= "-c client_encoding=UTF8"
+    )
+    print("Conexión existosa")
+except UnicodeDecodeError as e:
+    print(f"UnicodeDecodeError: {e}")
+except Exception as e:
+    print(f"Ocurrió un error: {e}")
 
 cursor = conn.cursor()
 
 # Crear la tabla 'documentos' si no existe
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS documentos (
-        id VARCHAR(255) NOT NULL,
+        pk_id SERIAL PRIMARY KEY,            -- Clave primaria auto-incremental
+        api_id VARCHAR(255) UNIQUE NOT NULL, -- Almacena el 'id' del response, debe ser único
         fecha TIMESTAMP NOT NULL,
         nemo VARCHAR(255) NOT NULL,
         version VARCHAR(50)
@@ -35,23 +43,27 @@ API_URL = f"https://api.cammesa.com/pub-svc/public/findDocumentosByNemoRango?fec
 # Hacer la solicitud a la API
 response = requests.get(API_URL)
 
-print(response)
-
 # Verificar que la solicitud fue exitosa
 if response.status_code == 200:
-    data = response.json()
+    response_data = response.json()
     
     # Insertar datos en la tabla
-    for item in data:
+    for item in response_data:
+        api_id = item['id']  # Extraer el 'id' del API response
+        fecha = datetime.datetime.strptime(item['fecha'], '%d/%m/%Y')  # Convertir fecha
+        nemo = item['nemo']
+        version = item['version']
+
+        # Insertar en la base de datos
         cursor.execute("""
-            INSERT INTO documentos (id, fecha, nemo, version)
-            VALUES (%s, %s, %s, %s)
-            ON CONFLICT (id) DO NOTHING;
-        """, (item['id'], item['fecha'], item['nemo'], item['version']))
+            INSERT INTO documentos (api_id, fecha, nemo, version)
+            VALUES (%s, %s, %s, %s); 
+        """, (api_id, fecha, nemo, version))
     
     # Confirmar los cambios y cerrar la conexión
     conn.commit()
     print("Datos insertados correctamente.")
+    #print(f"{data}")
 else:
     print(f"Error en la solicitud a la API: {response.status_code}")
 
