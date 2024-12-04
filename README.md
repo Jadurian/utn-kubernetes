@@ -37,6 +37,8 @@ Postgres como motor de bases de datos
 
 Python para el desarrollo del ETL
 
+Docker Desktop para correr el clúster on premise
+
 Objetos kubernetes:
 
 Deployment: para la ejecución de la imagen construida en Docker a partir del script de python
