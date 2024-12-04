@@ -1,10 +1,16 @@
 UTN FRBA 
+
 CURSO DOCKER Y KUBERNETES
+
 Profesor: Marcos Tonina
+
 Actividad integradora Kubernetes
+
 Descripción:
+
 Profesor Marcos disculpas por no poder haber entregado algo que funcione, espero poder realizarlo en el transcurso de la semana.
 En un proyecto que se me ocurrió para mi trabajo, necesito requestear de la API de CAMMESA (Compañía Administradora del Mercado Eléctrico Mayorista de Argentina) apuntando a endpoints específico que retornan json con datos de informes, como este estilo:
+
 {
     "id": "8654F8401BA8D96E03258BAA007D9AC1",
     "fecha": "01/10/2024",
@@ -28,12 +34,15 @@ No voy a entrar en detalles, pero necesito escribir en tablas algunas values de 
 Tecnologías:
 
 Postgres como motor de bases de datos
+
 Python para el desarrollo del ETL
 
 Objetos kubernetes:
 
 Deployment: para la ejecución de la imagen construida en Docker a partir del script de python
+
 Statefulset: para la persistencia de los datos en la bd de postgres
+
 Service: entiendo que es la que permite la comunicación entre los pods de manera interna en el clúster más allá que puse None como valor al mismo
 
 
@@ -46,10 +55,13 @@ docker buildx build -t etl-cammesa:latest .
 Tercer paso: buildear los objetos de kubernetes
 
 Kubectl apply -f postgres-statefulset.yaml
+
 Kubectl apply -f postgres-service.yaml
+
 Kubectl apply -f etl-deployment.yaml
 
 Cuando realizo un “k get all” me retorna que existe un error en el pod que debería correr el código, pero tanto el servicio y el statefulset parecieran estar bien ya que puedo entrar al pod donde vive el postgres.
+
 Si realizo un k describe al pod del código figura:
 
     State:          Waiting
