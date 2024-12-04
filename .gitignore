@@ -1,0 +1,10 @@
+.zips/*
+.mdb/*
+__pycache__
+.venv/Scrips
+.venv
+docs/
+.env
+.zips
+
+

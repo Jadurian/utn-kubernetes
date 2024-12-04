@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etl-cammesa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etl-cammesa
+  template:
+    metadata:
+      labels:
+        app: etl-cammesa
+    spec:
+      containers:
+        - name: etl-container
+          image: etl-cammesa:latest
+          imagePullPolicy: IfNotPresent  # Usaremos la imagen local para el ETL
+      restartPolicy: Always
