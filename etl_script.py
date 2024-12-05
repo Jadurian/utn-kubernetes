@@ -7,9 +7,9 @@ import datetime
 # Configuración de la base de datos
 try:
     conn = psycopg2.connect(
-        host="localhost",
+        host="postgres-service",
         database="mydatabase",
-        user="postgres",
+        user="myuser",
         password="mypassword",
         port= "5432",
         #options= "-c client_encoding=UTF8"
