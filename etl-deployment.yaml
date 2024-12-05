@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: etl-cammesa
-          image: jadurian/etl-cammesa:0.1
+          image: jadurian/etl-cammesa:0.3
           imagePullPolicy: IfNotPresent  # Usaremos la imagen local para el ETL
       restartPolicy: Always

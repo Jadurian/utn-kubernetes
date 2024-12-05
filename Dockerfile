@@ -3,11 +3,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-COPY etl_script.py .
+COPY etl_script.py /app/
 
-CMD ["python"]
+CMD ["python3" , "etl_script.py"]
 
-ENTRYPOINT ["etl_script.py"]
+#ENTRYPOINT ["app/etl_script.py"]
 
