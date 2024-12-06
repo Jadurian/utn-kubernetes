@@ -36,7 +36,7 @@ No voy a entrar en detalles, pero necesito escribir en tablas algunas values de 
 
 ---
 
-Tecnologías:
+***Tecnologías:***
 
 Postgres como motor de bases de datos
 
@@ -44,30 +44,32 @@ Python para el desarrollo del ETL
 
 Docker Desktop para correr el clúster on premise
 
-Objetos kubernetes:
+***Objetos kubernetes:***
 
-Job: para la ejecución de la imagen construida en Docker a partir del script de python (reemplace el Deployment por un Job que corre una única vez, dado que con Deployment, el pod terminaba y volvía a querer ejecutarse, )
+<ins>Job</ins>: para la ejecución de la imagen construida en Docker a partir del script de python (reemplace el Deployment por un Job que corre una única vez, dado que con Deployment, el pod terminaba y volvía a querer ejecutarse, )
 
-Statefulset: para la persistencia de los datos en la bd de postgres
+<ins>Statefulset</ins>: para la persistencia de los datos en la bd de postgres
 
-Service: entiendo que es la que permite la comunicación entre los pods de manera interna en el clúster más allá que puse None como valor al mismo ya que no estoy exponiendo hacia afuera
+<ins>Service</ins>: entiendo que es la que permite la comunicación entre los pods de manera interna en el clúster más allá que puse None como valor al mismo ya que no estoy exponiendo hacia afuera
 
 ---
 
-Primer paso: desarrollar el código en Python
+<ins>***Procedimiento***</ins>
 
-Segundo paso: buildear la imagen a partir del código
+<ins>Primer paso</ins>: desarrollar el código en Python
 
-'docker buildx build -t etl-cammesa:latest .'
+<ins>Segundo paso</ins>: buildear la imagen a partir del código
 
-Tercer paso: buildear los objetos de kubernetes
+```docker buildx build -t etl-cammesa:latest .```
 
-'
+<ins>Tercer paso</ins>: buildear los objetos de kubernetes
+
+```
 Kubectl apply -f postgres-statefulset.yaml
 
 Kubectl apply -f postgres-service.yaml
 
 Kubectl apply -f etl-job.yaml
-'
+```
 
 
