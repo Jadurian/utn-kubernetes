@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: etl-cammesa-job
+spec:
+  template:
+    metadata:
+      name: etl-cammesa-job
+    spec:
+      containers:
+      - name: etl-cammesa-job
+        image: jadurian/etl-cammesa:0.1
+        # command: ["python", "/path/to/your/script.py"]  # Personaliza el comando si es necesario
+      restartPolicy: Never  # Importante: asegura que no se reinicie el contenedor
