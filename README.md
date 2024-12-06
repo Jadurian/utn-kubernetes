@@ -58,16 +58,16 @@ Primer paso: desarrollar el código en Python
 
 Segundo paso: buildear la imagen a partir del código
 
-'''docker buildx build -t etl-cammesa:latest .'''
+'docker buildx build -t etl-cammesa:latest .'
 
 Tercer paso: buildear los objetos de kubernetes
 
-'''
+'
 Kubectl apply -f postgres-statefulset.yaml
 
 Kubectl apply -f postgres-service.yaml
 
 Kubectl apply -f etl-job.yaml
-'''
+'
 
 
