@@ -8,8 +8,7 @@
 
 # UPDATE correción:
 
-Logré mejorar el código para que funcione la imagen buildeada del script de python.
-Logré 
+Logré mejorar el código para que funcione la imagen buildeada del script de python. Además reemplacé el Deployment por un Job, dado que con el Deployment el pod que corre el código insertaba la data pero al terminar su ejecución creaba otro pod para repetir el proceso y obviamente tiraba un error. Con un Job de única ejecución esto no sucede.
 
 ## Descripción:
 
@@ -130,3 +129,9 @@ mydatabase=# select * from documentos;
      1 | 8654F8401BA8D96E03258BAA007D9AC1 | 2024-10-01 00:00:00 | PARTE_POST_OPERATIVO | 2024-10-02T19:51:00.000-03:00
 (1 row)
 ```
+
+---
+
+***Próximos Pasos:***
+
+Modificaré el código para extraer la data en días que no estén hardcodeados en el script y dependan de triggers utilizando la librería de *datetime* combinando con el último dato subido de la API y el último dato existente en la tabla para que itere e inserte los registros que puedan ser insertados.
