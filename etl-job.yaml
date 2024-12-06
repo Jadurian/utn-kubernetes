@@ -10,5 +10,4 @@ spec:
       containers:
       - name: etl-cammesa-job
         image: jadurian/etl-cammesa:0.1
-        # command: ["python", "/path/to/your/script.py"]  # Personaliza el comando si es necesario
-      restartPolicy: Never  # Importante: asegura que no se reinicie el contenedor
+      restartPolicy: Never  

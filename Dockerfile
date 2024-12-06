@@ -7,7 +7,7 @@ RUN pip3 install -r requirements.txt
 
 COPY etl_script.py /app/
 
-CMD ["python3" , "etl_script.py"]
+CMD ["python3"]
 
-#ENTRYPOINT ["app/etl_script.py"]
+ENTRYPOINT ["app/etl_script.py"]
 
