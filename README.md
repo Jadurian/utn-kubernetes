@@ -61,7 +61,7 @@ Docker Desktop para correr el clúster on premise
 
 <ins>Segundo paso</ins>: buildear la imagen a partir del código
 
-```docker buildx build -t etl-cammesa:latest .```
+```docker buildx build -t etl-cammesa:0.1 .```
 
 <ins>Tercer paso</ins>: buildear los objetos de kubernetes
 
